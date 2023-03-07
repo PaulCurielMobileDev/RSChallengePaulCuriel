@@ -21,7 +21,7 @@ interface AllDao {
     fun getDriver(id:String) : List<Driver>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllDrivers(drivers: List<Driver>)
+    fun insertAllDrivers(drivers: List<Driver>)
 
     @Query("SELECT * FROM ${Constants.TABLE_ROUTES}")
     fun getAllRoutes() : List<Route>
@@ -48,6 +48,6 @@ interface AllDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllRoutes(drivers: List<Route>)
+    fun insertAllRoutes(drivers: List<Route>)
 
 }

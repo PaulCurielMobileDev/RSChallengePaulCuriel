@@ -31,14 +31,17 @@ class RoutesViewModel @Inject constructor(
     fun getRoutes(id: String) = viewModelScope.launch(Dispatchers.IO) {
         _routes.postValue(Resource.Loading())
 
-        val routes = routesRepository.getRoutesFilters(id)
-
+        val routesDeferref = async {
+            routesRepository.getRoutesFilters(id)
+        }
+        val routes = routesDeferref.await()
         if (routes.isEmpty()) {
-            _routes.postValue(Resource.Success(routesRepository.getLastI()))
+            val lastI = async { routesRepository.getLastI() }
+            _routes.postValue(Resource.Success(lastI.await()))
         } else {
             _routes.postValue(Resource.Success(routes))
         }
-
-        _driver.postValue(driversRepository.getDriver(id))
+        val driver = async { driversRepository.getDriver(id) }
+        _driver.postValue(driver.await())
     }
 }

@@ -11,7 +11,7 @@ class LocalDataSourceImpl @Inject constructor(private val dao: AllDao) : LocalDa
 
     override fun getDriver(id: String) = dao.getDriver(id)
 
-    override suspend fun insertAllDrivers(drivers: List<Driver>) = dao.insertAllDrivers(drivers)
+    override fun insertAllDrivers(drivers: List<Driver>) = dao.insertAllDrivers(drivers)
 
     override fun getAllRoutes() = dao.getAllRoutes()
 
@@ -21,5 +21,5 @@ class LocalDataSourceImpl @Inject constructor(private val dao: AllDao) : LocalDa
 
     override fun getLastI() = dao.getLastI()
 
-    override suspend fun insertAllRoutes(drivers: List<Route>) = dao.insertAllRoutes(drivers)
+    override fun insertAllRoutes(drivers: List<Route>) = dao.insertAllRoutes(drivers)
 }

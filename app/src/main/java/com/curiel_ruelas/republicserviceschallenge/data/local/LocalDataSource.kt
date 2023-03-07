@@ -11,7 +11,7 @@ interface LocalDataSource {
 
     fun getDriver(id:String) : List<Driver>
 
-    suspend fun insertAllDrivers(drivers: List<Driver>)
+    fun insertAllDrivers(drivers: List<Driver>)
 
     fun getAllRoutes() : List<Route>
 
@@ -21,6 +21,6 @@ interface LocalDataSource {
 
     fun getLastI() : List<Route>
 
-    suspend fun insertAllRoutes(drivers: List<Route>)
+    fun insertAllRoutes(drivers: List<Route>)
 
 }
