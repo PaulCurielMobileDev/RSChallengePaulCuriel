@@ -2,12 +2,12 @@ package com.curiel_ruelas.republicserviceschallenge.di
 
 import android.content.Context
 import com.curiel_ruelas.republicserviceschallenge.BuildConfig
-import com.curiel_ruelas.republicserviceschallenge.data.local.AllDao
 import com.curiel_ruelas.republicserviceschallenge.data.local.AppDatabase
+import com.curiel_ruelas.republicserviceschallenge.data.local.LocalDataSource
+import com.curiel_ruelas.republicserviceschallenge.data.local.LocalDataSourceImpl
 import com.curiel_ruelas.republicserviceschallenge.data.remote.*
 import com.curiel_ruelas.republicserviceschallenge.data.repository.*
 import com.curiel_ruelas.republicserviceschallenge.utils.Config
-import com.curiel_ruelas.republicserviceschallenge.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -105,7 +105,11 @@ object AppModule {
         driversRepository
 
     @Provides
-    fun provedeRoutesRepository(routesRepository: RoutesRepositoryImpl): RoutesRepository =
+    fun provideRoutesRepository(routesRepository: RoutesRepositoryImpl): RoutesRepository =
         routesRepository
+
+    @Provides
+    fun provideLocalDataSource(localDataSource: LocalDataSourceImpl): LocalDataSource =
+        localDataSource
 
 }
