@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Republic Services Challenge</string>
+    <string name="sort">SORT</string>
+    <string name="typeRoute">Type : %S</string>
+</resources>
