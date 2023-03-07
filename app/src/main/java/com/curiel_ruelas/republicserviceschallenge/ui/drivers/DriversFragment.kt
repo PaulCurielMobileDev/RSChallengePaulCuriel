@@ -28,7 +28,7 @@ class DriversFragment : Fragment(), DriversAdapter.DriverInterface {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDriversBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,9 +50,8 @@ class DriversFragment : Fragment(), DriversAdapter.DriverInterface {
                 }
                 is Resource.Success -> {
                     binding.pbDrivers.visibility = View.GONE
-                    it.data?.let { drivers ->
-                        (binding.rvDrivers.adapter as DriversAdapter).info = drivers
-                    }
+                    (binding.rvDrivers.adapter as DriversAdapter).info = it.data
+
 
                 }
                 is Resource.Error -> {
@@ -78,6 +77,12 @@ class DriversFragment : Fragment(), DriversAdapter.DriverInterface {
 
     override fun onDriverSelected(driver: Driver) {
         parentFragmentManager.beginTransaction().apply {
+            setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right,
+                android.R.anim.fade_in,
+                android.R.anim.slide_out_right
+            )
             replace(R.id.container, RoutesFragment.newInstance(driverId = driver.id))
             addToBackStack(null)
             commit()
