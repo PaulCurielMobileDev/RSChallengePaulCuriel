@@ -23,7 +23,7 @@ class DriversViewModel @Inject constructor(private val driversRepository: Driver
         getDrivers()
     }
 
-    fun getDrivers() = viewModelScope.launch(Dispatchers.IO) {
+    fun getDrivers() = viewModelScope.launch (Dispatchers.IO) {
         _drivers.postValue(Resource.Loading())
         driversRepository.getDrivers().let {
             _drivers.postValue(it)

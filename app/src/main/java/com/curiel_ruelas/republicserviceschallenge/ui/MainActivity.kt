@@ -20,14 +20,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
             setKeepOnScreenCondition() {
-                when(viewModel.isReady.value){
-                    is Resource.Success-> true
-                    is Resource.Error-> {
-                        Toast.makeText(this@MainActivity,
-                            (viewModel.isReady.value as Resource.Error<Boolean>).msg,Toast.LENGTH_LONG).show()
+                when (viewModel.isReady.value) {
+                    is Resource.Success -> true
+                    is Resource.Error -> {
+                        Toast.makeText(
+                            this@MainActivity,
+                            (viewModel.isReady.value as Resource.Error<Boolean>).msg,
+                            Toast.LENGTH_LONG
+                        ).show()
                         true
                     }
-                    is Resource.Loading-> false
+                    is Resource.Loading -> false
                     else -> false
                 }
 
@@ -40,5 +43,13 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, DriversFragment())
                 .commitNow()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, DriversFragment())
+            .commitNow()
+
     }
 }
