@@ -67,10 +67,10 @@ class DriversFragment : Fragment(), DriversAdapter.DriverInterface {
 
         binding.tbDrivers.setOnMenuItemClickListener {
 
-            if ((binding.rvDrivers.adapter as DriversAdapter).isSorted()) {
-                viewModel.getDrivers()
-            } else
+            if (viewModel.getfilter()) {
                 viewModel.sortDrivers()
+            } else
+                viewModel.getDrivers()
             return@setOnMenuItemClickListener false
         }
     }

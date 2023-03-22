@@ -16,8 +16,6 @@ class DriversAdapter(private val interactor: DriverInterface) :
             notifyDataSetChanged()
         }
 
-    var sorted = false
-
     inner class DriverHolder(private val binding: RowDriversBinding) : ViewHolder(binding.root) {
 
         fun bind(info: Driver) {
@@ -39,11 +37,6 @@ class DriversAdapter(private val interactor: DriverInterface) :
 
     override fun onBindViewHolder(holder: DriverHolder, position: Int) {
         holder.bind(info[position])
-    }
-
-    fun isSorted(): Boolean {
-        sorted = !sorted
-        return !sorted
     }
 
     interface DriverInterface {

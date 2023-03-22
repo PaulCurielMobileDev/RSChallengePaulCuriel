@@ -19,11 +19,19 @@ class DriversViewModel @Inject constructor(private val driversRepository: Driver
     val drivers: LiveData<Resource<List<Driver>>>
         get() = _drivers
 
+    private var filter = false
+
+
+    fun getfilter(): Boolean {
+        filter=!filter
+        return filter
+    }
+
     init {
         getDrivers()
     }
 
-    fun getDrivers() = viewModelScope.launch (Dispatchers.IO) {
+    fun getDrivers() = viewModelScope.launch(Dispatchers.IO) {
         _drivers.postValue(Resource.Loading())
         driversRepository.getDrivers().let {
             _drivers.postValue(it)
